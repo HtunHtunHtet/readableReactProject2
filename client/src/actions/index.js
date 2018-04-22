@@ -1,16 +1,16 @@
 //import api
 import *  as api from '../utils/api';
 
-export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
 
 //get all categories
-export const getAllCategories   = allCategories =>({
-    type    : GET_ALL_CATEGORIES,
-    allCategories
+export const getCategories = categories => ({
+    type: GET_CATEGORIES,
+    categories
 });
 
-//get al categories , action dispatch
-export const fetchAllCategories = () => dispatch => api
-    .fetchAllCategories().then(allCategories =>dispatch(getAllCategories(allCategories)))
-
-
+//fetch all categories
+export const fetchAllCategories = () => dispatch =>
+    api
+        .getAllCategoriesFromBackend()
+        .then(categories => dispatch(getCategories(categories)));

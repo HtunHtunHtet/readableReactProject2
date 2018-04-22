@@ -2,16 +2,17 @@
 const ROOT_URL = 'http://localhost:3001';
 
 //token declaration
-let tokenAccesss = localStorage.token;
-if (!tokenAccesss) {
-    tokenAccesss = localStorage.token = Math.random();
-}
+let tokenAccesss = '12312312313';
 
 //header declaration
-const header = {
+const headers = {
     Authorization: tokenAccesss,
 }
 
 //fetch all categories api call
-export const fetchAllCategories = ()=> fetch(`${ROOT_URL}/categories`,{header})
-                                            .then(data => data.categories)
+export const getAllCategoriesFromBackend = () => fetch(`${ROOT_URL}/categories`, { headers })
+        .then(res => res.json())
+        .then(data => data.categories);
+
+//check all categories is coming in or not
+ console.log (getAllCategoriesFromBackend());

@@ -1,15 +1,14 @@
 import { combineReducers } from "redux";
-import { GET_ALL_CATEGORIES } from '../actions';
+import { GET_CATEGORIES } from '../actions';
 
-function getAllCategories (state = {} , action ){
+function receiveCategories (state = {} , action){
     switch(action.type){
-        case GET_ALL_CATEGORIES:
-            return state.categories
+        case GET_CATEGORIES:
+            return action.categories;
         default:
             return state;
     }
 }
-
 export default combineReducers({
-    getAllCategories
+    receiveCategories
 })
