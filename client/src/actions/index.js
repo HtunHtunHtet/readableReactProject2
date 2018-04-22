@@ -1,6 +1,5 @@
 //import api
 import *  as api from '../utils/api';
-
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 
 //get all categories
