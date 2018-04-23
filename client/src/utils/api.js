@@ -15,4 +15,18 @@ export const getAllCategoriesFromBackend = () => fetch(`${ROOT_URL}/categories`,
         .then(data => data.categories);
 
 //check all categories is coming in or not
- console.log (getAllCategoriesFromBackend());
+//  console.log (getAllCategoriesFromBackend());
+
+
+//retrieve all posts from the api
+export const getAllArticles = () => fetch (`${ROOT_URL}/posts`,{
+        headers}).then (result => result.json());
+
+//get All Comment Form A Post
+export const getCommentsFromPost = postId =>
+    fetch(`${ROOT_URL}/posts/${postId}/comments`, { headers }).then(response =>
+        response.json().then(data => data)
+    );
+
+//check comment can retrieve or not
+console.log("Particular Comment",getCommentsFromPost("8xf0y6ziyjabvozdd253nd"));
