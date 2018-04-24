@@ -29,4 +29,4 @@ export const getCommentsFromPost = postId =>
     );
 
 //check comment can retrieve or not
-console.log("Particular Comment",getCommentsFromPost("8xf0y6ziyjabvozdd253nd"));
+// console.log("Particular Comment",getCommentsFromPost("8xf0y6ziyjabvozdd253nd"));

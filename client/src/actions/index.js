@@ -23,7 +23,7 @@ export const fetchAllCategories = () => dispatch =>
         .then(categories => dispatch(getCategories(categories)));
 
 
-
+//fetch posts along with comments as well
 export const fetchAllPosts = () => dispatch =>
     api.getAllArticles().then(posts => Promise.all(
                 posts.map(post => api
