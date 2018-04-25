@@ -16,7 +16,6 @@ class PostByCategories extends Component {
         this.props.getPostsByCategory(this.props.match.params.category);
     }
 
-
     render() {
         const {posts} = this.props.posts;
         //check props
@@ -62,7 +61,7 @@ class PostByCategories extends Component {
                     {/*add posts button*/}
                     <Link to="/addnewpost">
                         <div className="row">
-                            <Button bsStyle="primary">Add Post</Button>
+                            <Button bsStyle="primary">Add New Post</Button>
                         </div>
                     </Link>
                 </div>
