@@ -42,4 +42,6 @@ export const submitPost = post => fetch (`${ROOT_URL}/posts`, {
                                         body: JSON.stringify(post)
                                     }).then(data=>data.json());
 
-//get posts
+//get got for categories
+export const getPostByCategory = cat => fetch (`${ROOT_URL}/${cat}/posts`,{headers})
+                                        .then(data => data.json());

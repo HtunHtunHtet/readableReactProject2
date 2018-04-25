@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchAllCategories} from "../actions";
+import { Link } from "react-router-dom";
+import {fetchAllCategories,getPostsByCategory} from "../actions";
 import Navbar from 'react-bootstrap/lib/Navbar';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Nav from 'react-bootstrap/lib/Nav';
-import NavDropdown from 'react-bootstrap/lib/NavDropdown';
-import MenuItem from 'react-bootstrap/lib/MenuItem';
 
 class mainMenu extends Component {
     componentDidMount(){
         this.props.fetchAllCategories();
+    }
+
+
+    fetchPostsByCategory = cat => {
+        console.log(cat);
+        this.props.getPostsByCategory(cat)
     }
 
     render(){
@@ -19,25 +24,25 @@ class mainMenu extends Component {
              <Navbar>
                  <Navbar.Header>
                      <Navbar.Brand>
-                         <a href="#">React Readable</a>
+                         <a href="#">
+                             <Link to={`/`}>
+                                React Readable
+                             </Link>
+                         </a>
                      </Navbar.Brand>
                  </Navbar.Header>
                  <Nav>
 
-                     {receiveCategories.length >0 &&
-                        receiveCategories.map((category) =>(
-                            <NavItem eventKey={1} href="#">
+                     {receiveCategories.length > 0 &&
+                     receiveCategories.map((category) => (
+                         <NavItem href="#" eventKey={1} onClick={() => this.fetchPostsByCategory(category.name)}>
+                             <Link to={`/${category.name}`}>
                                 {category.name}
-                            </NavItem>
-                        ))
+                             </Link>
+                         </NavItem>
+
+                     ))
                      }
-                     <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                         <MenuItem eventKey={3.1}>Action</MenuItem>
-                         <MenuItem eventKey={3.2}>Another action</MenuItem>
-                         <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                         <MenuItem divider />
-                         <MenuItem eventKey={3.4}>Separated link</MenuItem>
-                     </NavDropdown>
                  </Nav>
              </Navbar>
          </div>
@@ -50,5 +55,5 @@ const mapStateToProps = ({ receiveCategories }) => ({
     receiveCategories
 });
 export default connect(mapStateToProps, {
-    fetchAllCategories
+    fetchAllCategories,getPostsByCategory
 })(mainMenu)
