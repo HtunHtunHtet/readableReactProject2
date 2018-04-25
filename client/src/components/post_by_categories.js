@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/lib/Button';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Glyphicon   from 'react-bootstrap/lib/Glyphicon';
+import Timestamp from "react-timestamp";
 
 class PostByCategories extends Component {
 
@@ -34,19 +35,51 @@ class PostByCategories extends Component {
                                     <Panel.Body>
                                         <div>{post.body}</div>
                                         <div>
-                                            <ButtonToolbar>
-                                                <ButtonGroup>
-                                                    <Button>
-                                                        <Glyphicon glyph="thumbs-up" />
-                                                    </Button>
-                                                    <Button>
-                                                        <div>{post.voteScore}</div>
-                                                    </Button>
-                                                    <Button>
-                                                        <Glyphicon glyph="thumbs-down" text="2" />
-                                                    </Button>
-                                                </ButtonGroup>
-                                            </ButtonToolbar>
+                                            <div className="row">
+                                                <div className="col-md-4 col-sm-4 col-xs-4">
+                                                    <ButtonToolbar>
+                                                        <ButtonGroup>
+                                                            <Button>
+                                                                <Glyphicon glyph="thumbs-up" />
+                                                            </Button>
+                                                            <Button>
+                                                                <div>{post.voteScore}</div>
+                                                            </Button>
+                                                            <Button>
+                                                                <Glyphicon glyph="thumbs-down" text="2" />
+                                                            </Button>
+                                                        </ButtonGroup>
+                                                    </ButtonToolbar>
+                                                </div>
+                                                <div className="col-md-4 col-sm-4 col-xs-4">
+                                                    <ButtonToolbar>
+                                                        <ButtonGroup>
+                                                            <Button>
+                                                                <Glyphicon glyph="comment" />
+                                                            </Button>
+                                                            <Button>
+                                                                <div>{post.commentCount}</div>
+                                                            </Button>
+                                                        </ButtonGroup>
+                                                    </ButtonToolbar>
+                                                </div>
+
+                                                <div className="col-md-4 col-sm-4 col-xs-4">
+                                                    <ButtonToolbar>
+                                                        <ButtonGroup>
+                                                            <Button>
+                                                                <div>Posted on:</div>
+                                                            </Button>
+                                                            <Button>
+                                                                <Timestamp
+                                                                    time={post.timestamp / 1000}
+                                                                    format="full"
+                                                                />
+                                                            </Button>
+                                                        </ButtonGroup>
+                                                    </ButtonToolbar>
+                                                </div>
+                                            </div>
                                         </div>
                                     </Panel.Body>
                                 </Panel>
