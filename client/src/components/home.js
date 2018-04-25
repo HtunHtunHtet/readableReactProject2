@@ -27,6 +27,11 @@ class Home extends Component {
                 <MainMenu/>
                 <div className="container">
                     <div className="row">
+                        <div className = "col-md-6">
+                            <h3>Category: All</h3>
+                        </div>
+                    </div>
+                    <div className="row">
                         {posts && posts.length > 0 ? posts.map(
                             post => (
                                 <Panel bsStyle="primary">

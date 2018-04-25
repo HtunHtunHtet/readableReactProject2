@@ -9,6 +9,7 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Glyphicon   from 'react-bootstrap/lib/Glyphicon';
 import Timestamp from "react-timestamp";
+import Label from 'react-bootstrap/lib/Label';
 
 class PostByCategories extends Component {
 
@@ -19,12 +20,19 @@ class PostByCategories extends Component {
 
     render() {
         const {posts} = this.props.posts;
+        let { category } = this.props.match.params;
         //check props
         console.log("new posts",{posts});
         return(
             <div>
                 <MainMenu/>
                 <div className="container">
+                    <div className="row">
+                        <div className = "col-md-6">
+                            <h3>{`Category: ${category}`}</h3>
+                        </div>
+                    </div>
+
                     <div className="row">
                         {posts && posts.length > 0 ? posts.map(
                             post => (
