@@ -30,3 +30,16 @@ export const getCommentsFromPost = postId =>
 
 //check comment can retrieve or not
 // console.log("Particular Comment",getCommentsFromPost("8xf0y6ziyjabvozdd253nd"));
+
+
+//adding post to server
+export const submitPost = post => fetch (`${ROOT_URL}/posts`, {
+                                        method: "POST",
+                                        headers: {
+                                            ...headers,
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify(post)
+                                    }).then(data=>data.json());
+
+//get posts

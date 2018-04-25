@@ -2,6 +2,7 @@
 import *  as api from '../utils/api';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const RETRIEVE_POSTS  = 'RETRIEVE_POSTS';
+export const ADDING_POSTS    = 'ADDING_POSTS';
 
 //get all categories
 export const getCategories = categories => ({
@@ -14,6 +15,11 @@ export const retrievePost = posts => ({
     type: RETRIEVE_POSTS,
     posts
 });
+
+export const submittingPost = post => ({
+    type: ADDING_POSTS,
+    post
+})
 
 
 //fetch all categories
@@ -31,3 +37,8 @@ export const fetchAllPosts = () => dispatch =>
                         .then(comments => (post.comments = comments))
                         .then(() => post)
                 ))).then(posts => dispatch(retrievePost(posts)));
+
+
+//add post
+export const retrieveSubmittingPost = post =>dispatch =>
+    api.submitPost(post).then(post=>dispatch(submittingPost(post)))

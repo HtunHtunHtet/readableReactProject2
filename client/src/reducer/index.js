@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
-import { GET_CATEGORIES , RETRIEVE_POSTS } from '../actions';
+import { GET_CATEGORIES , RETRIEVE_POSTS,
+        ADDING_POSTS
+} from '../actions';
 
 function receiveCategories (state = {} , action){
     switch(action.type){
@@ -15,6 +17,11 @@ function posts (state= {} ,action){
             return {
                 ...state,
                 posts: action.posts
+            }
+        case ADDING_POSTS:
+            return{
+                ...state,
+                post: action.post
             }
         default:
             return state;
