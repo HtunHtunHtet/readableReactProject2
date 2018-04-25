@@ -37,7 +37,7 @@ class Home extends Component {
                                         <div>{post.body}</div>
                                         <div>
                                             <div className="row">
-                                                <div className="col-md-4 col-sm-4 col-xs-4">
+                                                <div className="col-md-3 col-sm-3">
                                                     <ButtonToolbar>
                                                         <ButtonGroup>
                                                             <Button>
@@ -52,7 +52,7 @@ class Home extends Component {
                                                         </ButtonGroup>
                                                     </ButtonToolbar>
                                                 </div>
-                                                <div className="col-md-4 col-sm-4 col-xs-4">
+                                                <div className="col-md-3 col-sm-3">
                                                     <ButtonToolbar>
                                                         <ButtonGroup>
                                                             <Button>
@@ -65,7 +65,7 @@ class Home extends Component {
                                                     </ButtonToolbar>
                                                 </div>
 
-                                                <div className="col-md-4 col-sm-4 col-xs-4">
+                                                <div className="col-md-3 col-sm-3">
                                                     <ButtonToolbar>
                                                         <ButtonGroup>
                                                             <Button>
@@ -76,6 +76,19 @@ class Home extends Component {
                                                                     time={post.timestamp / 1000}
                                                                     format="full"
                                                                 />
+                                                            </Button>
+                                                        </ButtonGroup>
+                                                    </ButtonToolbar>
+                                                </div>
+
+                                                <div className="col-md-3 col-sm-3">
+                                                    <ButtonToolbar>
+                                                        <ButtonGroup>
+                                                            <Button>
+                                                                <Glyphicon glyph="user" />
+                                                            </Button>
+                                                            <Button>
+                                                                <div>{post.author}</div>
                                                             </Button>
                                                         </ButtonGroup>
                                                     </ButtonToolbar>
