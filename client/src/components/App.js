@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './home';
 import AddNewPost from './add_new_post';
 import PostByCat from './post_by_categories';
+import updateSinglePost from './update_single_post';
 import '../App.css';
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
      <Switch>
          <Route exact path="/" component={Home} />
          <Route exact path="/addnewpost" component={AddNewPost} />
+         <Route exact path="/editPost/:singlePostId" component={updateSinglePost} />
          <Route exact path="/:category" component={PostByCat} />
      </Switch>
     );

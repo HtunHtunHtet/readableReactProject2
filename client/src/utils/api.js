@@ -63,3 +63,7 @@ export const deleteSinglePost = id => {return fetch(`${ROOT_URL}/posts/${id}`, {
                                                 method: "DELETE", headers})
                                             .then(res => res);
 };
+
+//get post details
+export const getPostDetails = id => fetch (`${ROOT_URL}/posts/${id}` ,{headers})
+                                        .then(result=>result.json());

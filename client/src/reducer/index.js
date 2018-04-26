@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 import { GET_CATEGORIES , RETRIEVE_POSTS,
         ADDING_POSTS, GET_POSTS_BY_CATEGORY,
-        VOT_ON_POST , DELETE_SINGLE_POST
+        VOT_ON_POST , DELETE_SINGLE_POST,
+        GET_POST_DETAILS
 } from '../actions';
 
 function receiveCategories (state = {} , action){
@@ -38,12 +39,20 @@ function posts (state= {} ,action){
                 posts: updateVoteOnPosts
             };
         case DELETE_SINGLE_POST:
-            const fetchUpdatedPosts = state.posts.filter(
-                post => post.id !== action.postId
-            );
+            const fetchUpdatedPosts = state.posts
+                    .filter(
+                        post =>
+                            post.id !== action.postId
+                    );
             return {
                 ...state,
                 posts: fetchUpdatedPosts
+            };
+        case GET_POST_DETAILS:
+            console.log("getpostdetails")
+            return {
+                ...state,
+                details: [action.details]
             };
         default:
             return state;

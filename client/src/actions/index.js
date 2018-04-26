@@ -1,11 +1,12 @@
 //import api
 import *  as api from '../utils/api';
-export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const RETRIEVE_POSTS  = 'RETRIEVE_POSTS';
 export const ADDING_POSTS    = 'ADDING_POSTS';
-export const GET_POSTS_BY_CATEGORY  = 'GET_POSTS_BY_CATEGORY';
 export const VOT_ON_POST = 'VOT_ON_POST';
 export const DELETE_SINGLE_POST= 'DELETE_SINGLE_POST';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_POSTS_BY_CATEGORY  = 'GET_POSTS_BY_CATEGORY';
+export const GET_POST_DETAILS       = 'GET_POST_DETAILS';
 
 // all dispatch
 export const getCategories = categories => ({
@@ -39,6 +40,12 @@ export const getDeleteSinglePost = postId => ({
     type: DELETE_SINGLE_POST,
     postId
 });
+
+//post details
+export const getPostDetails = details => ({
+    type: GET_POST_DETAILS,
+    details
+})
 
 
 //fetch all categories
@@ -79,3 +86,10 @@ export const getVotePostOnVoting =  (id, option) =>dispatch =>
 export const retrieveDeleteSinglePost = postId =>
         dispatch => api.deleteSinglePost(postId)
         .then(post => dispatch(getDeleteSinglePost(postId)));
+
+
+//retrieve post details
+export const recievePostDetails = id => dispatch =>
+    api.getPostDetails(id).then(details => dispatch(getPostDetails(details)));
+
+

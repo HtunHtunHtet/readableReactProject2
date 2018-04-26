@@ -111,7 +111,9 @@ class Home extends Component {
                                                 <div className="col-md-offset-8 col-md-4">
                                                     <ButtonToolbar>
                                                         <Button bsStyle="info" bsSize="lg" >
-                                                            Update Post
+                                                            <Link to={`/editpost/${post.id}`} >
+                                                                Update Post
+                                                            </Link>
                                                         </Button>
                                                         <Button bsStyle="danger" bsSize="lg"  onClick={()=>this.deletePost(post.id)}>
                                                             Delete Post
