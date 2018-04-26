@@ -102,6 +102,19 @@ class PostByCategories extends Component {
                                                 </div>
                                             </div>
                                         </div>
+                                        <br/>
+                                        <div className="row">
+                                            <div className="col-md-offset-8 col-md-4">
+                                                <ButtonToolbar>
+                                                    <Button bsStyle="info" bsSize="lg" >
+                                                        Update Post
+                                                    </Button>
+                                                    <Button bsStyle="danger" bsSize="lg" >
+                                                        Delete Post
+                                                    </Button>
+                                                </ButtonToolbar>
+                                            </div>
+                                        </div>
                                     </Panel.Body>
                                 </Panel>
                             )
