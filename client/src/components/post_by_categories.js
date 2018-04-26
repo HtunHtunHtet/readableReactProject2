@@ -18,6 +18,15 @@ class PostByCategories extends Component {
         this.props.getPostsByCategory(this.props.match.params.category);
     }
 
+    voteScore = (id, option = "upVote") => {
+        this.props.getVotePostOnVoting(id,option);
+    }
+
+    deletePost = id => {
+        this.props.retrieveDeleteSinglePost(id);
+    }
+
+
     render() {
         const {posts} = this.props.posts;
         let { category } = this.props.match.params;
@@ -47,13 +56,13 @@ class PostByCategories extends Component {
                                                 <div className="col-md-3 col-sm-3">
                                                     <ButtonToolbar>
                                                         <ButtonGroup>
-                                                            <Button>
+                                                            <Button onClick={() => this.voteScore(post.id, "upVote")}>
                                                                 <Glyphicon glyph="thumbs-up" />
                                                             </Button>
                                                             <Button>
                                                                 <div>{post.voteScore}</div>
                                                             </Button>
-                                                            <Button>
+                                                            <Button onClick={() => this.voteScore(post.id, "downVote")}>
                                                                 <Glyphicon glyph="thumbs-down" text="2" />
                                                             </Button>
                                                         </ButtonGroup>
@@ -109,7 +118,7 @@ class PostByCategories extends Component {
                                                     <Button bsStyle="info" bsSize="lg" >
                                                         Update Post
                                                     </Button>
-                                                    <Button bsStyle="danger" bsSize="lg" >
+                                                    <Button bsStyle="danger" bsSize="lg" onClick={()=>this.deletePost(post.id)}>
                                                         Delete Post
                                                     </Button>
                                                 </ButtonToolbar>
