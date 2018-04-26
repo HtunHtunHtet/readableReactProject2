@@ -21,7 +21,9 @@ class Home extends Component {
         this.props.getVotePostOnVoting(id,option);
     }
 
-
+    deletePost = id => {
+        this.props.retrieveDeleteSinglePost(id);
+    }
 
     render() {
         const {posts} = this.props.posts;
@@ -111,7 +113,7 @@ class Home extends Component {
                                                         <Button bsStyle="info" bsSize="lg" >
                                                             Update Post
                                                         </Button>
-                                                        <Button bsStyle="danger" bsSize="lg" >
+                                                        <Button bsStyle="danger" bsSize="lg"  onClick={()=>this.deletePost(post.id)}>
                                                             Delete Post
                                                         </Button>
                                                     </ButtonToolbar>

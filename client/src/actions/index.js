@@ -5,8 +5,9 @@ export const RETRIEVE_POSTS  = 'RETRIEVE_POSTS';
 export const ADDING_POSTS    = 'ADDING_POSTS';
 export const GET_POSTS_BY_CATEGORY  = 'GET_POSTS_BY_CATEGORY';
 export const VOT_ON_POST = 'VOT_ON_POST';
+export const DELETE_SINGLE_POST= 'DELETE_SINGLE_POST';
 
-// all dispatch 
+// all dispatch
 export const getCategories = categories => ({
     type: GET_CATEGORIES,
     categories
@@ -32,6 +33,12 @@ export const VoteOnPost = voteCount =>({
     type: VOT_ON_POST,
     payload: voteCount
 })
+
+//Delete Post
+export const getDeleteSinglePost = postId => ({
+    type: DELETE_SINGLE_POST,
+    postId
+});
 
 
 //fetch all categories
@@ -68,4 +75,7 @@ export const getPostsByCategory = cat => dispatch =>
 export const getVotePostOnVoting =  (id, option) =>dispatch =>
     api.voteToPost(id,option).then(count=> dispatch(VoteOnPost(count)));
 
-
+//delete post
+export const retrieveDeleteSinglePost = postId =>
+        dispatch => api.deleteSinglePost(postId)
+        .then(post => dispatch(getDeleteSinglePost(postId)));

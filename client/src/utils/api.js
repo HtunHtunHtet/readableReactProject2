@@ -58,4 +58,8 @@ export const voteToPost = (id, option) => fetch(`${ROOT_URL}/posts/${id}`,
                                                     body: JSON.stringify({option}
                                                 )}).then(data => data.json());
 
-//Delete Vote
+//Delete Post
+export const deleteSinglePost = id => {return fetch(`${ROOT_URL}/posts/${id}`, {
+                                                method: "DELETE", headers})
+                                            .then(res => res);
+};

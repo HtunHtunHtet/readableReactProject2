@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { GET_CATEGORIES , RETRIEVE_POSTS,
         ADDING_POSTS, GET_POSTS_BY_CATEGORY,
-        VOT_ON_POST
+        VOT_ON_POST , DELETE_SINGLE_POST
 } from '../actions';
 
 function receiveCategories (state = {} , action){
@@ -19,12 +19,12 @@ function posts (state= {} ,action){
             return {
                 ...state,
                 posts: action.posts
-            }
+            };
         case ADDING_POSTS:
             return{
                 ...state,
                 post: action.post
-            }
+            };
         case VOT_ON_POST:
             const updateVoteOnPosts = state.posts.map(
                 post => {
@@ -37,7 +37,14 @@ function posts (state= {} ,action){
                 ...state,
                 posts: updateVoteOnPosts
             };
-
+        case DELETE_SINGLE_POST:
+            const fetchUpdatedPosts = state.posts.filter(
+                post => post.id !== action.postId
+            );
+            return {
+                ...state,
+                posts: fetchUpdatedPosts
+            };
         default:
             return state;
     }
@@ -45,5 +52,5 @@ function posts (state= {} ,action){
 
 
 export default combineReducers({
-    receiveCategories,posts
+    receiveCategories, posts
 })
