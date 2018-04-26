@@ -45,3 +45,17 @@ export const submitPost = post => fetch (`${ROOT_URL}/posts`, {
 //get got for categories
 export const getPostByCategory = cat => fetch (`${ROOT_URL}/${cat}/posts`,{headers})
                                         .then(data => data.json());
+
+
+//voting post
+export const voteToPost = (id, option) => fetch(`${ROOT_URL}/posts/${id}`,
+                                                {
+                                                    method: `POST`,
+                                                    headers: {
+                                                        ...headers,
+                                                        "Content-Type": "application/json"
+                                                    },
+                                                    body: JSON.stringify({option}
+                                                )}).then(data => data.json());
+
+//Delete Vote

@@ -17,6 +17,11 @@ class Home extends Component {
         this.props.fetchAllPosts();
     }
 
+    voteScore = (id, option = "upVote") => {
+        this.props.getVotePostOnVoting(id,option);
+    }
+
+
 
     render() {
         const {posts} = this.props.posts;
@@ -45,13 +50,13 @@ class Home extends Component {
                                                 <div className="col-md-3 col-sm-3">
                                                     <ButtonToolbar>
                                                         <ButtonGroup>
-                                                            <Button>
+                                                            <Button  onClick={() => this.voteScore(post.id, "upVote")}>
                                                                 <Glyphicon glyph="thumbs-up" />
                                                             </Button>
                                                             <Button>
                                                                 <div>{post.voteScore}</div>
                                                             </Button>
-                                                            <Button>
+                                                            <Button onClick={() => this.voteScore(post.id, "downVote")}>
                                                                 <Glyphicon glyph="thumbs-down" text="2" />
                                                             </Button>
                                                         </ButtonGroup>

@@ -4,8 +4,9 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const RETRIEVE_POSTS  = 'RETRIEVE_POSTS';
 export const ADDING_POSTS    = 'ADDING_POSTS';
 export const GET_POSTS_BY_CATEGORY  = 'GET_POSTS_BY_CATEGORY';
+export const VOT_ON_POST = 'VOT_ON_POST';
 
-//get all categories
+// all dispatch 
 export const getCategories = categories => ({
     type: GET_CATEGORIES,
     categories
@@ -25,6 +26,11 @@ export const submittingPost = post => ({
 export const gettingPostsByCat = posts => ({
     type: GET_POSTS_BY_CATEGORY,
     posts
+})
+
+export const VoteOnPost = voteCount =>({
+    type: VOT_ON_POST,
+    payload: voteCount
 })
 
 
@@ -57,4 +63,9 @@ export const getPostsByCategory = cat => dispatch =>
                                                                         .then(comments=>posts.comments = comments)
                                                                         .then(() => post)
                                                 ))).then(posts => dispatch(gettingPostsByCat(posts)));
+
+//get voting on the post
+export const getVotePostOnVoting =  (id, option) =>dispatch =>
+    api.voteToPost(id,option).then(count=> dispatch(VoteOnPost(count)));
+
 
