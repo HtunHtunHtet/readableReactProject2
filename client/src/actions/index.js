@@ -1,14 +1,14 @@
 //import api
 import *  as api from '../utils/api';
-// import {updatePostDetails} from "../utils/api";
-export const RETRIEVE_POSTS  = 'RETRIEVE_POSTS';
+
 export const ADDING_POSTS    = 'ADDING_POSTS';
 export const VOT_ON_POST = 'VOT_ON_POST';
 export const DELETE_SINGLE_POST= 'DELETE_SINGLE_POST';
+export const UPDATE_POST            = 'UPDATE_POST';
+export const RETRIEVE_POSTS  = 'RETRIEVE_POSTS';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_POSTS_BY_CATEGORY  = 'GET_POSTS_BY_CATEGORY';
 export const GET_POST_DETAILS       = 'GET_POST_DETAILS';
-export const UPDATE_POST            = 'UPDATE_POST';
 
 // all dispatch
 export const getCategories = categories => ({
