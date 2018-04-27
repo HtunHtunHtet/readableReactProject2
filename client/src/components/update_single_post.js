@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { recievePostDetails } from '../actions';
+import { recievePostDetails , receiveUpdatePost } from '../actions';
 import MainMenu from './mainMenu';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl  from 'react-bootstrap/lib/FormControl';
@@ -24,7 +24,6 @@ class updateSinglePost extends Component {
     componentDidMount() {
         const { singlePostId } = this.props.match.params;
         this.props.recievePostDetails(singlePostId).then(() => {
-            // console.log (this.props);
             const { id, title, author, body, category } = this.props.posts.details[0];
             this.setState({
                 id: id,
@@ -33,6 +32,8 @@ class updateSinglePost extends Component {
                 content: body,
                 categoryName: category
             });
+
+
         });
     }
     handleChange = e =>{
@@ -48,23 +49,22 @@ class updateSinglePost extends Component {
 
     handleSubmit = e =>{
         e.preventDefault();
+        const {id, title, content, author,categoryName } = this.state
         const submitUpdateValues = {
-            id: uuid(),
-            timestamp: Date.now(),
-            title: this.state.title,
-            body: this.state.content,
-            author: this.state.author,
-            category: this.state.categoryName,
-            deleted: false,
-            voteScore: 1
+            id: id,
+            title: title,
+            body: content,
+            author: author,
+            category: categoryName,
         };
-        console.log (submitUpdateValues);
-        /*this.props.history.push("/");*/
+        console.log ("Submit Values: ",submitUpdateValues);
+        this.props.receiveUpdatePost(submitUpdateValues, id);
+        this.props.history.push("/");
     }
 
     render() {
         //check props
-        console.log("current state", this.state);
+       /* console.log("current state", this.state);*/
         return(
             <div>
                 <MainMenu/>
@@ -144,5 +144,5 @@ const mapStateToProps = ({ posts }) => ({
     posts
 });
 
-export default connect(mapStateToProps,{recievePostDetails})(updateSinglePost);
+export default connect(mapStateToProps,{recievePostDetails,receiveUpdatePost})(updateSinglePost);
 

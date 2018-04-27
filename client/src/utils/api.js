@@ -67,3 +67,15 @@ export const deleteSinglePost = id => {return fetch(`${ROOT_URL}/posts/${id}`, {
 //get post details
 export const getPostDetails = id => fetch (`${ROOT_URL}/posts/${id}` ,{headers})
                                         .then(result=>result.json());
+
+//update post details
+export const updatePostDetails = (details, id ) => {
+    return fetch(`${ROOT_URL}/posts/${id}`, {
+        method: `PUT`,
+        headers:{
+            ...headers,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(details)
+    }).then(result=>result.json())
+}

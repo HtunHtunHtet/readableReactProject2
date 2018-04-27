@@ -9,7 +9,6 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Glyphicon   from 'react-bootstrap/lib/Glyphicon';
 import Timestamp from "react-timestamp";
-import Label from 'react-bootstrap/lib/Label';
 
 class PostByCategories extends Component {
 
@@ -116,7 +115,9 @@ class PostByCategories extends Component {
                                             <div className="col-md-offset-8 col-md-4">
                                                 <ButtonToolbar>
                                                     <Button bsStyle="info" bsSize="lg" >
-                                                        Update Post
+                                                        <Link to={`/editpost/${post.id}`} >
+                                                            Update Post
+                                                        </Link>
                                                     </Button>
                                                     <Button bsStyle="danger" bsSize="lg" onClick={()=>this.deletePost(post.id)}>
                                                         Delete Post

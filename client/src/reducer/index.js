@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { GET_CATEGORIES , RETRIEVE_POSTS,
         ADDING_POSTS, GET_POSTS_BY_CATEGORY,
         VOT_ON_POST , DELETE_SINGLE_POST,
-        GET_POST_DETAILS
+        GET_POST_DETAILS, UPDATE_POST
 } from '../actions';
 
 function receiveCategories (state = {} , action){
@@ -47,6 +47,12 @@ function posts (state= {} ,action){
             return {
                 ...state,
                 posts: fetchUpdatedPosts
+            };
+        case UPDATE_POST:
+            console.log("update post reducer");
+            return {
+                ...state,
+                ...action.details
             };
         case GET_POST_DETAILS:
             console.log("getpostdetails")

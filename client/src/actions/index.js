@@ -1,5 +1,6 @@
 //import api
 import *  as api from '../utils/api';
+// import {updatePostDetails} from "../utils/api";
 export const RETRIEVE_POSTS  = 'RETRIEVE_POSTS';
 export const ADDING_POSTS    = 'ADDING_POSTS';
 export const VOT_ON_POST = 'VOT_ON_POST';
@@ -7,6 +8,7 @@ export const DELETE_SINGLE_POST= 'DELETE_SINGLE_POST';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_POSTS_BY_CATEGORY  = 'GET_POSTS_BY_CATEGORY';
 export const GET_POST_DETAILS       = 'GET_POST_DETAILS';
+export const UPDATE_POST            = 'UPDATE_POST';
 
 // all dispatch
 export const getCategories = categories => ({
@@ -47,6 +49,11 @@ export const getPostDetails = details => ({
     details
 })
 
+//post update
+export const updatePost = (details, id) =>({
+    type: UPDATE_POST,
+    details, id
+})
 
 //fetch all categories
 export const fetchAllCategories = () => dispatch =>
@@ -92,4 +99,11 @@ export const retrieveDeleteSinglePost = postId =>
 export const recievePostDetails = id => dispatch =>
     api.getPostDetails(id).then(details => dispatch(getPostDetails(details)));
 
+
+//update post
+export const receiveUpdatePost = (details, id) => dispatch =>
+    api.updatePostDetails(details,id)
+        .then(details=>dispatch(updatePost(details,id)));
+
+console.log("test");
 
