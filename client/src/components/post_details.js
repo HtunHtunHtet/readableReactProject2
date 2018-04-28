@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {receiveSinglePostDetails, getAllComments,getVotePostOnVoting,retrieveDeleteSinglePost }  from '../actions';
+import {receiveSinglePostDetails, receiveCommentForOnePostAction,getVotePostOnVoting,retrieveDeleteSinglePost }  from '../actions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import MainMenu from './mainMenu';
@@ -30,8 +30,10 @@ class PostDetails extends Component {
 
     render() {
         const {posts} = this.props.posts;
+        const {comments} = this.props.receiveComments;
+
         //check props
-        console.log("loop for post", this.props);
+        console.log("comment list",  {comments});
         return(
             <div>
                 <MainMenu/>
@@ -41,6 +43,7 @@ class PostDetails extends Component {
                             {
                                 posts && posts.length > 0 ? posts.map(
                                 post => (
+                                    <div>
                                         <Panel bsStyle="primary">
                                             <Panel.Heading>
                                                 <Panel.Title componentClass="h3">{post.title}</Panel.Title>
@@ -124,6 +127,37 @@ class PostDetails extends Component {
                                                 </div>
                                             </Panel.Body>
                                         </Panel>
+                                        <Panel>
+                                            {
+                                                comments && comments
+                                                    .map(comment => (
+                                                        <Panel.Body className="panel-comment-body">
+                                                            <div className="row">
+                                                                <div className="col-md-10">
+                                                                    {comment.body}
+                                                                </div>
+                                                                <div className="col-md-2">
+                                                                    <ButtonToolbar>
+                                                                        <ButtonGroup>
+                                                                            <Button>
+                                                                                <Glyphicon glyph="thumbs-up" />
+                                                                            </Button>
+                                                                            <Button>
+                                                                                <div>{comment.voteScore}</div>
+                                                                            </Button>
+                                                                            <Button>
+                                                                                <Glyphicon glyph="thumbs-down" text="2" />
+                                                                            </Button>
+                                                                        </ButtonGroup>
+                                                                    </ButtonToolbar>
+                                                                </div>
+                                                            </div>
+                                                        </Panel.Body>
+                                                    )
+                                                )
+                                            }
+                                        </Panel>
+                                    </div>
 
                                 )
                             ):(
@@ -132,11 +166,6 @@ class PostDetails extends Component {
                                 </Panel>
                             )}
                         </div>
-                    <div className="row">
-                        <div className="col-md-12">
-
-                        </div>
-                    </div>
                 </div>
             </div>
         )
@@ -144,13 +173,13 @@ class PostDetails extends Component {
 
 }
 
-const mapStateToProps = ({posts}) => ({posts});
+const mapStateToProps = ({posts , receiveComments}) => ({posts,receiveComments});
 
 const mapDispatchToProps = dispatch  =>({
     receiveSinglePost : postId =>
                             dispatch(receiveSinglePostDetails(postId))
                                 /*dispatch for comment*/
-                                .then(()=>getAllComments(postId)),
+                                .then(()=>dispatch(receiveCommentForOnePostAction(postId))),
     /*dispatch vote posts*/
     votingOnPost: (id,option) =>
                             dispatch(getVotePostOnVoting(id,option)),

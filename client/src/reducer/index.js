@@ -59,7 +59,7 @@ function posts (state= {} ,action){
             console.log("getpostdetails")
             return {
                 ...state,
-                details: [action.details]
+                comments: [action.comments]
             };
         case GET_SINGLE_POST_DETAILS:
            return {

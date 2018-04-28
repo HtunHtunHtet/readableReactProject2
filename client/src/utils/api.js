@@ -24,12 +24,12 @@ export const getAllArticles = () => fetch (`${ROOT_URL}/posts`,{
 
 //get All Comment Form A Post
 export const getCommentsFromPost = postId =>
-    fetch(`${ROOT_URL}/posts/${postId}/comments`, { headers }).then(response =>
-        response.json().then(data => data)
+    fetch(`${ROOT_URL}/posts/${postId}/comments`, { headers })
+        .then(response => response.json().then(data => data)
     );
 
 //check comment can retrieve or not
-// console.log("Particular Comment",getCommentsFromPost("8xf0y6ziyjabvozdd253nd"));
+console.log("Particular Comment",getCommentsFromPost("8xf0y6ziyjabvozdd253nd"));
 
 
 //adding post to server

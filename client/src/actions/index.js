@@ -113,19 +113,19 @@ export const receiveUpdatePost = (details, id) => dispatch =>
     api.updatePostDetails(details,id)
         .then(details=>dispatch(updatePost(details,id)));
 
-console.log("test");
-
 //getting single post details
 export const receiveSinglePostDetails =  id  => dispatch =>
         api.getSinglePostDetails(id).then(details =>dispatch(getSinglePostDetails(details)));
 
 
 //get All Comments for the selected post
-export const getAllComments = (id) => ({
+export const getAllComments = comments => ({
     type: GET_ALL_COMMENTS,
-    id
+    comments
 })
 
-export const receiveCommentForOnePost  = id =>dispatch =>
-        api.getCommentsFromPost(id).then()
+export const receiveCommentForOnePostAction  = id =>dispatch =>
+        api.getCommentsFromPost(id)
+            .then(comments =>dispatch(getAllComments(comments)));
+
 
