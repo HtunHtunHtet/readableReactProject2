@@ -23,8 +23,11 @@ class updateSinglePost extends Component {
     //call post details
     componentDidMount() {
         const { singlePostId } = this.props.match.params;
+
         this.props.recievePostDetails(singlePostId).then(() => {
             const { id, title, author, body, category } = this.props.posts.details[0];
+            console.log(this.props.posts.details);
+
             this.setState({
                 id: id,
                 title: title,
@@ -32,8 +35,6 @@ class updateSinglePost extends Component {
                 content: body,
                 categoryName: category
             });
-
-
         });
     }
     handleChange = e =>{
