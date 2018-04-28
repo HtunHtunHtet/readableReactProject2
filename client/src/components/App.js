@@ -4,6 +4,7 @@ import Home from './home';
 import AddNewPost from './add_new_post';
 import PostByCat from './post_by_categories';
 import updateSinglePost from './update_single_post';
+import postDetails from './post_details';
 import '../App.css';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
          <Route exact path="/" component={Home} />
          <Route exact path="/addnewpost" component={AddNewPost} />
          <Route exact path="/editPost/:singlePostId" component={updateSinglePost} />
+         <Route exact path="/:category/:postId" component={postDetails} />
          <Route exact path="/:category" component={PostByCat} />
      </Switch>
     );

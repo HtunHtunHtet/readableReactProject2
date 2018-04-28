@@ -9,6 +9,8 @@ export const RETRIEVE_POSTS  = 'RETRIEVE_POSTS';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_POSTS_BY_CATEGORY  = 'GET_POSTS_BY_CATEGORY';
 export const GET_POST_DETAILS       = 'GET_POST_DETAILS';
+export const GET_SINGLE_POST_DETAILS = 'GET_SINGLE_POST_DETAILS';
+export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
 
 // all dispatch
 export const getCategories = categories => ({
@@ -53,6 +55,12 @@ export const getPostDetails = details => ({
 export const updatePost = (details, id) =>({
     type: UPDATE_POST,
     details, id
+})
+
+//get SinglePostDetails
+export const getSinglePostDetails = posts => ({
+    type: GET_SINGLE_POST_DETAILS,
+    posts
 })
 
 //fetch all categories
@@ -106,4 +114,18 @@ export const receiveUpdatePost = (details, id) => dispatch =>
         .then(details=>dispatch(updatePost(details,id)));
 
 console.log("test");
+
+//getting single post details
+export const receiveSinglePostDetails =  id  => dispatch =>
+        api.getSinglePostDetails(id).then(details =>dispatch(getSinglePostDetails(details)));
+
+
+//get All Comments for the selected post
+export const getAllComments = (id) => ({
+    type: GET_ALL_COMMENTS,
+    id
+})
+
+export const receiveCommentForOnePost  = id =>dispatch =>
+        api.getCommentsFromPost(id).then()
 

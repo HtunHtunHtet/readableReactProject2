@@ -2,7 +2,8 @@ import { combineReducers } from "redux";
 import { GET_CATEGORIES , RETRIEVE_POSTS,
         ADDING_POSTS, GET_POSTS_BY_CATEGORY,
         VOT_ON_POST , DELETE_SINGLE_POST,
-        GET_POST_DETAILS, UPDATE_POST
+        GET_POST_DETAILS, UPDATE_POST,
+        GET_ALL_COMMENTS,GET_SINGLE_POST_DETAILS
 } from '../actions';
 
 function receiveCategories (state = {} , action){
@@ -60,6 +61,23 @@ function posts (state= {} ,action){
                 ...state,
                 details: [action.details]
             };
+        case GET_SINGLE_POST_DETAILS:
+           return {
+               ...state,
+               posts: [action.posts]
+           }
+        default:
+            return state;
+    }
+}
+
+function receiveComments(state = {} , action){
+    switch (action.type){
+        case GET_ALL_COMMENTS:
+            return {
+                ...state,
+                comments: action.comments
+            }
         default:
             return state;
     }
@@ -67,5 +85,5 @@ function posts (state= {} ,action){
 
 
 export default combineReducers({
-    receiveCategories, posts
+    receiveCategories, posts , receiveComments
 })

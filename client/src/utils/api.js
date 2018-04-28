@@ -79,3 +79,10 @@ export const updatePostDetails = (details, id ) => {
         body: JSON.stringify(details)
     }).then(result=>result.json())
 }
+
+//fetch single post details from the backend
+export const getSinglePostDetails = id =>
+    fetch(`${ROOT_URL}/posts/${id}`,{headers}).then(data=>data.json());
+
+//test api
+console.log("single post details" ,getSinglePostDetails('8xf0y6ziyjabvozdd253nd'));

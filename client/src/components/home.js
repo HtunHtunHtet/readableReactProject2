@@ -25,6 +25,7 @@ class Home extends Component {
         this.props.retrieveDeleteSinglePost(id);
     }
 
+
     render() {
         const {posts} = this.props.posts;
         //check props
@@ -41,89 +42,96 @@ class Home extends Component {
                     <div className="row">
                         {posts && posts.length > 0 ? posts.map(
                             post => (
-                                <Panel bsStyle="primary">
-                                    <Panel.Heading>
-                                        <Panel.Title componentClass="h3">{post.title}</Panel.Title>
-                                    </Panel.Heading>
-                                    <Panel.Body>
-                                        <div>{post.body}</div>
-                                        <div>
-                                            <div className="row">
-                                                <div className="col-md-3 col-sm-3">
-                                                    <ButtonToolbar>
-                                                        <ButtonGroup>
-                                                            <Button  onClick={() => this.voteScore(post.id, "upVote")}>
-                                                                <Glyphicon glyph="thumbs-up" />
-                                                            </Button>
-                                                            <Button>
-                                                                <div>{post.voteScore}</div>
-                                                            </Button>
-                                                            <Button onClick={() => this.voteScore(post.id, "downVote")}>
-                                                                <Glyphicon glyph="thumbs-down" text="2" />
-                                                            </Button>
-                                                        </ButtonGroup>
-                                                    </ButtonToolbar>
-                                                </div>
-                                                <div className="col-md-3 col-sm-3">
-                                                    <ButtonToolbar>
-                                                        <ButtonGroup>
-                                                            <Button>
-                                                                <Glyphicon glyph="comment" />
-                                                            </Button>
-                                                            <Button>
-                                                                <div>{post.commentCount}</div>
-                                                            </Button>
-                                                        </ButtonGroup>
-                                                    </ButtonToolbar>
-                                                </div>
 
-                                                <div className="col-md-3 col-sm-3">
-                                                    <ButtonToolbar>
-                                                        <ButtonGroup>
-                                                            <Button>
-                                                                <div>Posted on:</div>
-                                                            </Button>
-                                                            <Button>
-                                                                <Timestamp
-                                                                    time={post.timestamp / 1000}
-                                                                    format="full"
-                                                                />
-                                                            </Button>
-                                                        </ButtonGroup>
-                                                    </ButtonToolbar>
-                                                </div>
 
-                                                <div className="col-md-3 col-sm-3">
-                                                    <ButtonToolbar>
-                                                        <ButtonGroup>
-                                                            <Button>
-                                                                <Glyphicon glyph="user" />
+                                    <Panel bsStyle="primary">
+                                        <Panel.Heading>
+                                            <Panel.Title componentClass="h3">{post.title}</Panel.Title>
+                                        </Panel.Heading>
+                                        <Panel.Body>
+                                            <div>{post.body}</div>
+                                            <div>
+                                                <div className="row">
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <ButtonToolbar>
+                                                            <ButtonGroup>
+                                                                <Button  onClick={() => this.voteScore(post.id, "upVote")}>
+                                                                    <Glyphicon glyph="thumbs-up" />
+                                                                </Button>
+                                                                <Button>
+                                                                    <div>{post.voteScore}</div>
+                                                                </Button>
+                                                                <Button onClick={() => this.voteScore(post.id, "downVote")}>
+                                                                    <Glyphicon glyph="thumbs-down" text="2" />
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </ButtonToolbar>
+                                                    </div>
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <ButtonToolbar>
+                                                            <ButtonGroup>
+                                                                <Button>
+                                                                    <Glyphicon glyph="comment" />
+                                                                </Button>
+                                                                <Button>
+                                                                    <div>{post.commentCount}</div>
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </ButtonToolbar>
+                                                    </div>
+
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <ButtonToolbar>
+                                                            <ButtonGroup>
+                                                                <Button>
+                                                                    <div>Posted on:</div>
+                                                                </Button>
+                                                                <Button>
+                                                                    <Timestamp
+                                                                        time={post.timestamp / 1000}
+                                                                        format="full"
+                                                                    />
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </ButtonToolbar>
+                                                    </div>
+
+                                                    <div className="col-md-3 col-sm-3">
+                                                        <ButtonToolbar>
+                                                            <ButtonGroup>
+                                                                <Button>
+                                                                    <Glyphicon glyph="user" />
+                                                                </Button>
+                                                                <Button>
+                                                                    <div>{post.author}</div>
+                                                                </Button>
+                                                            </ButtonGroup>
+                                                        </ButtonToolbar>
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                                <div className="row">
+                                                    <div className="col-md-offset-8 col-md-4">
+                                                        <ButtonToolbar>
+                                                            <Button bsStyle="info" bsSize="lg" >
+                                                                <Link to={`/editpost/${post.id}`} >
+                                                                    Update Post
+                                                                </Link>
                                                             </Button>
-                                                            <Button>
-                                                                <div>{post.author}</div>
+                                                            <Button bsStyle="danger" bsSize="lg"  onClick={()=>this.deletePost(post.id)}>
+                                                                Delete Post
                                                             </Button>
-                                                        </ButtonGroup>
-                                                    </ButtonToolbar>
+                                                            <Button bsStyle="primary" bsSize="lg">
+                                                                <Link to={`/${post.category}/${post.id}`}>
+                                                                        View
+                                                                </Link>
+                                                            </Button>
+                                                        </ButtonToolbar>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <br/>
-                                            <div className="row">
-                                                <div className="col-md-offset-8 col-md-4">
-                                                    <ButtonToolbar>
-                                                        <Button bsStyle="info" bsSize="lg" >
-                                                            <Link to={`/editpost/${post.id}`} >
-                                                                Update Post
-                                                            </Link>
-                                                        </Button>
-                                                        <Button bsStyle="danger" bsSize="lg"  onClick={()=>this.deletePost(post.id)}>
-                                                            Delete Post
-                                                        </Button>
-                                                    </ButtonToolbar>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Panel.Body>
-                                </Panel>
+                                        </Panel.Body>
+                                    </Panel>
                             )
                         ):(
                         <Panel>
