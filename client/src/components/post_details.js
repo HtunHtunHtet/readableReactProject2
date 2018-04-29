@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import {receiveSinglePostDetails, receiveCommentForOnePostAction,getVotePostOnVoting,retrieveDeleteSinglePost }  from '../actions';
+import {
+    receiveSinglePostDetails,
+    receiveCommentForOnePostAction,
+    getVotePostOnVoting,
+    retrieveDeleteSinglePost,
+    receiveVoteSingleComment ,
+    receiveCommentToSinglePost
+} from '../actions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import MainMenu from './mainMenu';
@@ -9,9 +16,17 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Glyphicon   from 'react-bootstrap/lib/Glyphicon';
 import Timestamp from "react-timestamp";
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl  from 'react-bootstrap/lib/FormControl';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
+import uuid from "uuid/v1";
 
 class PostDetails extends Component {
-
+   //initial state for comment
+    state = {
+        commentAuthor: "",
+        commentContent: ""
+    };
 
     //mount all posts
     componentDidMount() {
@@ -27,6 +42,45 @@ class PostDetails extends Component {
         this.props.deletePost(id);
     }
 
+    votingSingleComment = (id , option) => {
+        this.props.voteOnComment(id,option);
+    }
+
+
+    handleCommentSubmit  = e => {
+        e.preventDefault();
+
+        const data = {
+            id: uuid(),
+            timestamp: Date.now(),
+            body: this.state.commentContent,
+            author: this.state.commentAuthor,
+            parentId: this.props.match.params.postId,
+            deleted: false,
+            parentDeleted: false,
+            voteScore: 1
+        };
+        console.log (data);
+
+        this.props.addCommentToPost (data);
+        this.setState({
+            commentAuthor: "",
+            commentContent: ""
+        });
+    }
+
+
+    handleInputChange = e => {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    };
+
+
 
     render() {
         const {posts} = this.props.posts;
@@ -41,7 +95,10 @@ class PostDetails extends Component {
                     {/*add posts button*/}
                         <div className="row">
                             {
-                                posts && posts.length > 0 ? posts.map(
+                                posts && posts.length > 0 &&
+                                posts.filter(
+                                    post => !post.deleted && Object.keys(post).length > 0 && !post.error
+                                ).map(
                                 post => (
                                     <div>
                                         <Panel bsStyle="primary">
@@ -129,7 +186,11 @@ class PostDetails extends Component {
                                         </Panel>
                                         <Panel>
                                             {
+                                                posts && posts.length > 0 &&
+                                                posts.filter(post => !post.deleted && Object.keys(post).length > 0).length > 0 &&
                                                 comments && comments
+                                                    .filter(comment => !comment.deleted)
+                                                    .filter(comment => !comment.parentDeleted)
                                                     .map(comment => (
                                                         <Panel.Body className="panel-comment-body">
                                                             <div className="row">
@@ -139,14 +200,29 @@ class PostDetails extends Component {
                                                                 <div className="col-md-2">
                                                                     <ButtonToolbar>
                                                                         <ButtonGroup>
-                                                                            <Button>
-                                                                                <Glyphicon glyph="thumbs-up" />
+                                                                            <Button onClick={() => this.votingSingleComment(comment.id, "upVote")}>
+                                                                                <Glyphicon glyph="thumbs-up"/>
                                                                             </Button>
                                                                             <Button>
                                                                                 <div>{comment.voteScore}</div>
                                                                             </Button>
-                                                                            <Button>
+                                                                            <Button onClick={() => this.votingSingleComment(comment.id, "downVote")}>
                                                                                 <Glyphicon glyph="thumbs-down" text="2" />
+                                                                            </Button>
+                                                                        </ButtonGroup>
+                                                                    </ButtonToolbar>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="row">
+                                                                <div className="col-md-6">
+                                                                    <ButtonToolbar>
+                                                                        <ButtonGroup>
+                                                                            <Button>
+                                                                                <Glyphicon glyph="user" />
+                                                                            </Button>
+                                                                            <Button>
+                                                                                <div>{comment.author}</div>
                                                                             </Button>
                                                                         </ButtonGroup>
                                                                     </ButtonToolbar>
@@ -158,9 +234,55 @@ class PostDetails extends Component {
                                             }
                                         </Panel>
                                     </div>
-
                                 )
-                            ):(
+                            )}
+
+                            {
+                                posts &&
+                                posts.length > 0 &&
+                                posts.filter(
+                                    post =>
+                                        !post.deleted && Object.keys(post).length > 0 && !post.error
+                                ).length > 0 ? (
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <h2>Add Comments</h2>
+
+                                            <form onSubmit={this.handleCommentSubmit}>
+                                                <FormGroup controlId="formBasicText">
+                                                    <ControlLabel>Author:</ControlLabel>
+                                                    <FormControl
+                                                        type="text"
+                                                        placeholder="Author Name"
+                                                        name = "commentAuthor"
+                                                        value={this.state.commentAuthor}
+                                                        onChange={this.handleInputChange}
+                                                        required="true"
+                                                    />
+                                                    <FormControl.Feedback />
+                                                </FormGroup>
+
+                                                <FormGroup controlId="formBasicText">
+                                                    <ControlLabel>Author:</ControlLabel>
+                                                    <FormControl
+                                                        componentClass="textarea"
+                                                        placeholder="Content"
+                                                        name = "commentContent"
+                                                        value={this.state.commentContent}
+                                                        onChange={this.handleInputChange}
+                                                        required="true"
+                                                    />
+                                                    <FormControl.Feedback />
+                                                </FormGroup>
+
+                                                <Button bsStyle="primary" type="submit">Add Comment</Button>
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                    )
+                            :(
                                 <Panel>
                                     <Panel.Body>Nothing To show</Panel.Body>
                                 </Panel>
@@ -186,9 +308,15 @@ const mapDispatchToProps = dispatch  =>({
 
     /*dispatch delete post*/
     deletePost:(id) =>
-                dispatch(retrieveDeleteSinglePost(id))
+                dispatch(retrieveDeleteSinglePost(id)),
 
-    /**/
+    /*dispatch voting posts */
+    voteOnComment:(commentId , option) =>
+                dispatch(receiveVoteSingleComment(commentId,option)),
+
+    /*add comment */
+    addCommentToPost: comment =>
+                dispatch(receiveCommentToSinglePost(comment))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(PostDetails);

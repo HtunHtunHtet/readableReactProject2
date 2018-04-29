@@ -11,6 +11,8 @@ export const GET_POSTS_BY_CATEGORY  = 'GET_POSTS_BY_CATEGORY';
 export const GET_POST_DETAILS       = 'GET_POST_DETAILS';
 export const GET_SINGLE_POST_DETAILS = 'GET_SINGLE_POST_DETAILS';
 export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
+export const VOTE_SINGLE_COMMENT = "VOTE_SINGLE_COMMENT";
+export const ADD_COMMENT_ON_POST = "ADD_COMMENT_ON_POST";
 
 // all dispatch
 export const getCategories = categories => ({
@@ -128,4 +130,23 @@ export const receiveCommentForOnePostAction  = id =>dispatch =>
         api.getCommentsFromPost(id)
             .then(comments =>dispatch(getAllComments(comments)));
 
+
+//vote on single comment
+export const getVoteSingleComment = (comment) =>({
+    type: VOTE_SINGLE_COMMENT,
+    comment
+});
+
+export const receiveVoteSingleComment = (id , option)=> dispatch =>
+        api.voteSingleComment(id, option).then(comments => dispatch(getVoteSingleComment(comments)));
+
+
+
+export const addingCommentToPost = comment  => ({
+        type: ADD_COMMENT_ON_POST,
+        comment
+});
+
+export const receiveCommentToSinglePost = comment => dispatch  =>
+    api.addCommentOnPost(comment).then(comment => dispatch (addingCommentToPost(comment)));
 

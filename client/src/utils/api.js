@@ -85,4 +85,29 @@ export const getSinglePostDetails = id =>
     fetch(`${ROOT_URL}/posts/${id}`,{headers}).then(data=>data.json());
 
 //test api
-console.log("single post details" ,getSinglePostDetails('8xf0y6ziyjabvozdd253nd'));
+//console.log("single post details" ,getSinglePostDetails('8xf0y6ziyjabvozdd253nd'));
+
+//vote Single Comment
+export const voteSingleComment = (id ,option) =>{
+    return fetch(`${ROOT_URL}/comments/${id}`, {
+        method: `POST`,
+        headers: {
+            ...headers,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({option})
+    }).then(result =>result.json);
+}
+
+//comment on post
+export const addCommentOnPost = comment  => {
+    const body = JSON.stringify(comment);
+    return fetch(`${ROOT_URL}/comments/`, {
+        method: "POST",
+        headers,
+        body
+    }).then(response => response.json());
+}
+
+
+

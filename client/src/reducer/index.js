@@ -3,7 +3,8 @@ import { GET_CATEGORIES , RETRIEVE_POSTS,
         ADDING_POSTS, GET_POSTS_BY_CATEGORY,
         VOT_ON_POST , DELETE_SINGLE_POST,
         GET_POST_DETAILS, UPDATE_POST,
-        GET_ALL_COMMENTS,GET_SINGLE_POST_DETAILS
+        GET_ALL_COMMENTS,GET_SINGLE_POST_DETAILS,
+        VOTE_SINGLE_COMMENT , ADD_COMMENT_ON_POST
 } from '../actions';
 
 function receiveCategories (state = {} , action){
@@ -78,6 +79,29 @@ function receiveComments(state = {} , action){
                 ...state,
                 comments: action.comments
             }
+        case VOTE_SINGLE_COMMENT:
+            //check comment state
+            console.log("state comment id",state.comments);
+            console.log("action comment id",action.comment);
+
+            //get new state of comment and return
+            const newCommentCount =state.comments.map(
+                                        comments => {
+                                            if(comments.id ===action.comment.id){
+                                                comments.voteScore = action.comment.voteScore;
+                                            }
+                                            return comments;
+                                        });
+            return {
+                ...state,
+                comments: newCommentCount
+            };
+        case ADD_COMMENT_ON_POST:
+            console.log("add comment",state.comments);
+            return {
+                ...state,
+                comments: state.comments.concat(action.comment)
+            };
         default:
             return state;
     }
