@@ -45,7 +45,6 @@ class updateSinglePost extends Component {
         this.setState({
             [name] : value
         });
-
     };
 
     handleSubmit = e =>{

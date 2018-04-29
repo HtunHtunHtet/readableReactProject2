@@ -9,6 +9,7 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Glyphicon   from 'react-bootstrap/lib/Glyphicon';
 import Timestamp from "react-timestamp";
+import Sorting from './sorting';
 
 class PostByCategories extends Component {
 
@@ -28,7 +29,8 @@ class PostByCategories extends Component {
 
     render() {
         const {posts} = this.props.posts;
-        let { category } = this.props.match.params;
+        let   {category} = this.props.match.params;
+        const {sort} = this.props.sort;
         //check props
         console.log("new posts",{posts});
         return(
@@ -42,7 +44,25 @@ class PostByCategories extends Component {
                     </div>
 
                     <div className="row">
-                        {posts && posts.length > 0 ? posts.map(
+                        <Sorting/>
+                        {
+                            posts && posts.length > 0 ? (
+                                posts
+                                    .filter(post => !post.deleted)
+                                    .sort((a, b) => {
+                                        switch (sort.value) {
+                                            case "unpopular":
+                                                console.log(a.voteScore);
+                                                return a.voteScore - b.voteScore;
+                                            case "oldest":
+                                                return a.timestamp - b.timestamp;
+                                            case "newest":
+                                                return b.timestamp - a.timestamp;
+                                            default:
+                                                return b.voteScore - a.voteScore;
+                                        }
+                                    })
+                                    .map(
                             post => (
                                     <Panel bsStyle="primary">
                                         <Panel.Heading>
@@ -133,7 +153,7 @@ class PostByCategories extends Component {
                                         </Panel.Body>
                                     </Panel>
                             )
-                        ):(
+                        )):(
                             <Panel>
                                 <Panel.Body>Nothing To show</Panel.Body>
                             </Panel>
@@ -153,7 +173,7 @@ class PostByCategories extends Component {
 
 }
 
-const mapStateToProps = ({posts}) => ({posts});
+const mapStateToProps = ({posts,sort}) => ({posts,sort});
 
 export default connect(mapStateToProps,action)(PostByCategories);
 

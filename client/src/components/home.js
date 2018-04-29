@@ -9,6 +9,8 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import Glyphicon   from 'react-bootstrap/lib/Glyphicon';
 import Timestamp from "react-timestamp";
+import Sorting from "./sorting";
+
 
 class Home extends Component {
 
@@ -27,12 +29,13 @@ class Home extends Component {
 
 
     render() {
+
         const {posts} = this.props.posts;
-        //check props
-        console.log({posts});
+        const {sort} = this.props.sort;
         return(
             <div>
                 <MainMenu/>
+
                 <div className="container">
                     <div className="row">
                         <div className = "col-md-6">
@@ -40,10 +43,26 @@ class Home extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        {posts && posts.length > 0 ? posts.map(
-                            post => (
-
-
+                        <Sorting/>
+                        {
+                            posts && posts.length > 0 ? (
+                                posts
+                                    .filter(post => !post.deleted)
+                                    .sort((a, b) => {
+                                        switch (sort.value) {
+                                            case "unpopular":
+                                                console.log(a.voteScore);
+                                                return a.voteScore - b.voteScore;
+                                            case "oldest":
+                                                return a.timestamp - b.timestamp;
+                                            case "newest":
+                                                return b.timestamp - a.timestamp;
+                                            default:
+                                                return b.voteScore - a.voteScore;
+                                        }
+                                    })
+                                .map(
+                                    post => (
                                     <Panel bsStyle="primary">
                                         <Panel.Heading>
                                             <Panel.Title componentClass="h3">{post.title}</Panel.Title>
@@ -133,7 +152,7 @@ class Home extends Component {
                                         </Panel.Body>
                                     </Panel>
                             )
-                        ):(
+                        )):(
                         <Panel>
                             <Panel.Body>Nothing To show</Panel.Body>
                         </Panel>
@@ -153,7 +172,7 @@ class Home extends Component {
 
 }
 
-const mapStateToProps = ({posts}) => ({posts});
+const mapStateToProps = ({posts,sort}) => ({posts,sort});
 
 export default connect(mapStateToProps,action)(Home);
 

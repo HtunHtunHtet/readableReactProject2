@@ -20,6 +20,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl  from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import uuid from "uuid/v1";
+import Sorting from "./sorting";
 
 class PostDetails extends Component {
    //initial state for comment
@@ -92,14 +93,13 @@ class PostDetails extends Component {
             <div>
                 <MainMenu/>
                 <div className="container">
-                    {/*add posts button*/}
                         <div className="row">
+                            <Sorting/>
                             {
                                 posts && posts.length > 0 &&
                                 posts.filter(
                                     post => !post.deleted && Object.keys(post).length > 0 && !post.error
-                                ).map(
-                                post => (
+                                ).map(post => (
                                     <div>
                                         <Panel bsStyle="primary">
                                             <Panel.Heading>
@@ -184,14 +184,30 @@ class PostDetails extends Component {
                                                 </div>
                                             </Panel.Body>
                                         </Panel>
+
                                         <Panel>
                                             {
-                                                posts && posts.length > 0 &&
+                                                posts &&
+                                                posts.length > 0 &&
                                                 posts.filter(post => !post.deleted && Object.keys(post).length > 0).length > 0 &&
-                                                comments && comments
+                                                comments &&
+                                                comments
                                                     .filter(comment => !comment.deleted)
                                                     .filter(comment => !comment.parentDeleted)
+                                                    .sort((a, b) => {
+                                                        switch (this.props.sort.sort.value) {
+                                                            case "unpopular":
+                                                                return a.voteScore - b.voteScore;
+                                                            case "oldest":
+                                                                return a.timestamp - b.timestamp;
+                                                            case "newest":
+                                                                return b.timestamp - a.timestamp;
+                                                            default:
+                                                                return b.voteScore - a.voteScore;
+                                                        }
+                                                    })
                                                     .map(comment => (
+
                                                         <Panel.Body className="panel-comment-body">
                                                             <div className="row">
                                                                 <div className="col-md-10">
@@ -229,6 +245,7 @@ class PostDetails extends Component {
                                                                 </div>
                                                             </div>
                                                         </Panel.Body>
+
                                                     )
                                                 )
                                             }
@@ -281,12 +298,11 @@ class PostDetails extends Component {
                                         </div>
 
                                     </div>
-                                    )
-                            :(
-                                <Panel>
-                                    <Panel.Body>Nothing To show</Panel.Body>
-                                </Panel>
-                            )}
+                                    ) :(
+                                        <Panel>
+                                            <Panel.Body>Nothing To show</Panel.Body>
+                                        </Panel>
+                                    )}
                         </div>
                 </div>
             </div>
@@ -295,7 +311,7 @@ class PostDetails extends Component {
 
 }
 
-const mapStateToProps = ({posts , receiveComments}) => ({posts,receiveComments});
+const mapStateToProps = ({posts , receiveComments,sort}) => ({posts,receiveComments,sort});
 
 const mapDispatchToProps = dispatch  =>({
     receiveSinglePost : postId =>

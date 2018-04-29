@@ -13,6 +13,7 @@ export const GET_SINGLE_POST_DETAILS = 'GET_SINGLE_POST_DETAILS';
 export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
 export const VOTE_SINGLE_COMMENT = "VOTE_SINGLE_COMMENT";
 export const ADD_COMMENT_ON_POST = "ADD_COMMENT_ON_POST";
+export const CHANGE_ORDER_BY_SORT = "CHANGE_ORDER_BY_SORT";
 
 // all dispatch
 export const getCategories = categories => ({
@@ -150,3 +151,9 @@ export const addingCommentToPost = comment  => ({
 export const receiveCommentToSinglePost = comment => dispatch  =>
     api.addCommentOnPost(comment).then(comment => dispatch (addingCommentToPost(comment)));
 
+export const changeSortAction = value => {
+    return {
+        type: CHANGE_ORDER_BY_SORT,
+        value: value
+    };
+};
