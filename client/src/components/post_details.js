@@ -6,7 +6,7 @@ import {
     retrieveDeleteSinglePost,
     receiveVoteSingleComment ,
     receiveCommentToSinglePost,
-    deleteCommentFromPost,
+    deleteSingleComment,
 } from '../actions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -48,8 +48,8 @@ class PostDetails extends Component {
         this.props.voteOnComment(id,option);
     }
 
-    deletingComment = id => {
-        this.props.deleteSingleComment ( id );
+    deleteComment = id => {
+        this.props.deletingComment ( id );
     }
 
 
@@ -274,7 +274,7 @@ class PostDetails extends Component {
                                                                             <Button bsStyle="info" bsSize="lg" >
                                                                                 Update Comment
                                                                             </Button>
-                                                                            <Button bsStyle="danger" bsSize="lg" onClick={()=> this.deletingComment(comment.id)}>
+                                                                            <Button bsStyle="danger" bsSize="lg" onClick={()=> this.deleteComment(comment.id)}>
                                                                                 Delete Comment
                                                                             </Button>
                                                                         </ButtonToolbar>
@@ -371,7 +371,7 @@ const mapDispatchToProps = dispatch  =>({
                 dispatch(receiveCommentToSinglePost(comment)),
 
     /*delete single comment */
-    deleteSingleComment: id => dispatch(deleteCommentFromPost(id))
+    deletingComment: id => dispatch(deleteSingleComment(id))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(PostDetails);
