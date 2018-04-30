@@ -7,6 +7,7 @@ let tokenAccesss = '12312312313';
 //header declaration
 const headers = {
     Authorization: tokenAccesss,
+    "Content-Type": "application/json",
 }
 
 //fetch all categories api call

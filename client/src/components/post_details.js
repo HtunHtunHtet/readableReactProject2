@@ -50,7 +50,6 @@ class PostDetails extends Component {
 
     handleCommentSubmit  = e => {
         e.preventDefault();
-
         const data = {
             id: uuid(),
             timestamp: Date.now(),
@@ -68,7 +67,7 @@ class PostDetails extends Component {
             commentAuthor: "",
             commentContent: ""
         });
-    }
+    };
 
 
     handleInputChange = e => {
