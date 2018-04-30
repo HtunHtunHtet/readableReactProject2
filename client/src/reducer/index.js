@@ -5,7 +5,7 @@ import { GET_CATEGORIES , RETRIEVE_POSTS,
         GET_POST_DETAILS, UPDATE_POST,
         GET_ALL_COMMENTS,GET_SINGLE_POST_DETAILS,
         VOTE_SINGLE_COMMENT , ADD_COMMENT_ON_POST,
-        CHANGE_ORDER_BY_SORT
+        CHANGE_ORDER_BY_SORT, DELETE_COMMENT_FROM_POST
 } from '../actions';
 
 function receiveCategories (state = {} , action){
@@ -101,6 +101,15 @@ function receiveComments(state = {} , action){
             return {
                 ...state,
                 comments: state.comments.concat(action.comment)
+            };
+        case DELETE_COMMENT_FROM_POST:
+            const remainingComments = state.comments.filter(
+                comment =>
+                    comment.id !== action.id
+            );
+            return {
+                ...state,
+                comments: remainingComments
             };
         default:
             return state;

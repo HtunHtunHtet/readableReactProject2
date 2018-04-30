@@ -14,6 +14,7 @@ export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
 export const VOTE_SINGLE_COMMENT = "VOTE_SINGLE_COMMENT";
 export const ADD_COMMENT_ON_POST = "ADD_COMMENT_ON_POST";
 export const CHANGE_ORDER_BY_SORT = "CHANGE_ORDER_BY_SORT";
+export const DELETE_COMMENT_FROM_POST = "DELETE_COMMENT_FROM_POST";
 
 // all dispatch
 export const getCategories = categories => ({
@@ -157,3 +158,14 @@ export const changeSortAction = value => {
         value: value
     };
 };
+
+export const deleteCommentFromPost = id  => {
+    return {
+        type: DELETE_COMMENT_FROM_POST,
+        id
+    }
+}
+
+export const deleteSingleComment = id => dispatch =>
+    api.deletePostComment(id)
+        .then(comment => dispatch(deleteCommentFromPost(id)));

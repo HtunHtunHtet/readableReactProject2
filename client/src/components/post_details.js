@@ -5,7 +5,8 @@ import {
     getVotePostOnVoting,
     retrieveDeleteSinglePost,
     receiveVoteSingleComment ,
-    receiveCommentToSinglePost
+    receiveCommentToSinglePost,
+    deleteCommentFromPost,
 } from '../actions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -45,6 +46,10 @@ class PostDetails extends Component {
 
     votingSingleComment = (id , option) => {
         this.props.voteOnComment(id,option);
+    }
+
+    deletingComment = id => {
+        this.props.deleteSingleComment ( id );
     }
 
 
@@ -230,7 +235,7 @@ class PostDetails extends Component {
                                                             </div>
 
                                                             <div className="row">
-                                                                <div className="col-md-6">
+                                                                <div className="col-md-5">
                                                                     <ButtonToolbar>
                                                                         <ButtonGroup>
                                                                             <Button>
@@ -242,7 +247,41 @@ class PostDetails extends Component {
                                                                         </ButtonGroup>
                                                                     </ButtonToolbar>
                                                                 </div>
+
+                                                                <div className="col-md-5">
+                                                                    <ButtonToolbar>
+                                                                        <ButtonGroup>
+                                                                            <Button>
+                                                                                <div>Comment Time:</div>
+                                                                            </Button>
+                                                                            <Button>
+                                                                                <Timestamp
+                                                                                    time={comment.timestamp / 1000}
+                                                                                    format="full"
+                                                                                />
+                                                                            </Button>
+                                                                        </ButtonGroup>
+                                                                    </ButtonToolbar>
+                                                                </div>
+
                                                             </div>
+
+                                                        <div className="row">
+                                                            <div className="col-md-12">
+                                                                <div className="row">
+                                                                    <div className="col-md-offset-8 col-md-4">
+                                                                        <ButtonToolbar>
+                                                                            <Button bsStyle="info" bsSize="lg" >
+                                                                                Update Comment
+                                                                            </Button>
+                                                                            <Button bsStyle="danger" bsSize="lg" onClick={()=> this.deletingComment(comment.id)}>
+                                                                                Delete Comment
+                                                                            </Button>
+                                                                        </ButtonToolbar>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         </Panel.Body>
 
                                                     )
@@ -293,9 +332,7 @@ class PostDetails extends Component {
 
                                                 <Button bsStyle="primary" type="submit">Add Comment</Button>
                                             </form>
-
                                         </div>
-
                                     </div>
                                     ) :(
                                         <Panel>
@@ -331,7 +368,10 @@ const mapDispatchToProps = dispatch  =>({
 
     /*add comment */
     addCommentToPost: comment =>
-                dispatch(receiveCommentToSinglePost(comment))
+                dispatch(receiveCommentToSinglePost(comment)),
+
+    /*delete single comment */
+    deleteSingleComment: id => dispatch(deleteCommentFromPost(id))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(PostDetails);

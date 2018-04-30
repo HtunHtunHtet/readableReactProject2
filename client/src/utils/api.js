@@ -110,5 +110,11 @@ export const addCommentOnPost = comment  => {
     }).then(response => response.json());
 }
 
+export const deletePostComment = id => {
+    return fetch(`${ROOT_URL}/comments/${id}`, {
+        method: "DELETE", headers
+    }).then (result => result.json());
+}
+
 
 
