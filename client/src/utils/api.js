@@ -97,7 +97,7 @@ export const voteSingleComment = (id ,option) =>{
             "Content-Type": "application/json"
         },
         body: JSON.stringify({option})
-    }).then(result =>result.json);
+    }).then(result =>result.json());
 }
 
 //comment on post
