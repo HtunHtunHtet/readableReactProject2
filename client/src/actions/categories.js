@@ -1,9 +1,10 @@
 //import api
 import *  as api from '../utils/api';
-export const GET_CATEGORIES = 'GET_CATEGORIES';
+import *  as Types from '../actions/actionType';
+
 // all dispatch
 export const getCategories = categories => ({
-    type: GET_CATEGORIES,
+    type: Types.GET_CATEGORIES,
     categories
 });
 

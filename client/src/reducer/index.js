@@ -1,5 +1,8 @@
 import { combineReducers } from "redux";
-import { GET_CATEGORIES } from '../actions/categories';
+// import { GET_CATEGORIES } from '../actions/categories';
+
+import receiveCategories from './receiveCategories';
+
 import {  RETRIEVE_POSTS, GET_POSTS_BY_CATEGORY,
           ADDING_POSTS, VOT_ON_POST , DELETE_SINGLE_POST,
           UPDATE_POST,  GET_POST_DETAILS, GET_SINGLE_POST_DETAILS} from '../actions/posts';
@@ -9,14 +12,6 @@ import {  RETRIEVE_POSTS, GET_POSTS_BY_CATEGORY,
 
 import { CHANGE_ORDER_BY_SORT } from '../actions/sorting';
 
-const receiveCategories = (state = {} , action) =>{
-    switch(action.type){
-        case GET_CATEGORIES:
-            return action.categories;
-        default:
-            return state;
-    }
-}
 const  posts =  (state= {} ,action) =>{
     switch(action.type){
         case GET_POSTS_BY_CATEGORY:
