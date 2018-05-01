@@ -11,7 +11,7 @@ import {  RETRIEVE_POSTS, GET_POSTS_BY_CATEGORY,
 
 import { CHANGE_ORDER_BY_SORT } from '../actions/sorting';
 
-function receiveCategories (state = {} , action){
+const receiveCategories = (state = {} , action) =>{
     switch(action.type){
         case GET_CATEGORIES:
             return action.categories;
@@ -19,7 +19,7 @@ function receiveCategories (state = {} , action){
             return state;
     }
 }
-function posts (state= {} ,action){
+const  posts =  (state= {} ,action) =>{
     switch(action.type){
         case GET_POSTS_BY_CATEGORY:
         case RETRIEVE_POSTS:
@@ -76,7 +76,7 @@ function posts (state= {} ,action){
     }
 }
 
-function receiveComments(state = {} , action){
+const receiveComments = (state = {} , action) =>{
     switch (action.type){
         case GET_ALL_COMMENTS:
             return {
@@ -127,15 +127,12 @@ function receiveComments(state = {} , action){
 }
 
 
-function sorting(state = { sort: "popular" }, action) {
+const  sorting = (state = { sort: "popular" }, action) => {
     switch (action.type) {
         case CHANGE_ORDER_BY_SORT:
             console.log("detect");
-            const newValue = action.value;
-            return {
-                ...state,
-                sort: newValue
-            };
+            const getInput = action.value;
+            return {...state, sort: getInput};
         default:
             return state;
     }
