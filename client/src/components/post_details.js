@@ -272,7 +272,9 @@ class PostDetails extends Component {
                                                                     <div className="col-md-offset-8 col-md-4">
                                                                         <ButtonToolbar>
                                                                             <Button bsStyle="info" bsSize="lg" >
+                                                                                <Link to={`/updateComment/${comment.id}`} >
                                                                                 Update Comment
+                                                                                </Link>
                                                                             </Button>
                                                                             <Button bsStyle="danger" bsSize="lg" onClick={()=> this.deleteComment(comment.id)}>
                                                                                 Delete Comment

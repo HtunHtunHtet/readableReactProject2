@@ -1,6 +1,5 @@
 //import api
 import *  as api from '../utils/api';
-
 export const ADDING_POSTS    = 'ADDING_POSTS';
 export const VOT_ON_POST = 'VOT_ON_POST';
 export const DELETE_SINGLE_POST= 'DELETE_SINGLE_POST';
@@ -15,6 +14,8 @@ export const VOTE_SINGLE_COMMENT = "VOTE_SINGLE_COMMENT";
 export const ADD_COMMENT_ON_POST = "ADD_COMMENT_ON_POST";
 export const CHANGE_ORDER_BY_SORT = "CHANGE_ORDER_BY_SORT";
 export const DELETE_COMMENT_FROM_POST = "DELETE_COMMENT_FROM_POST";
+export const GET_SINGLE_COMMENT  = "GET_SINGLE_COMMENT";
+export const UPDATE_SINGLE_COMMENT = "UPDATE_SINGLE_COMMENT";
 
 // all dispatch
 export const getCategories = categories => ({
@@ -65,6 +66,38 @@ export const updatePost = (details, id) =>({
 export const getSinglePostDetails = posts => ({
     type: GET_SINGLE_POST_DETAILS,
     posts
+})
+
+export const changeSortAction = value => {
+    return {
+        type: CHANGE_ORDER_BY_SORT,
+        value: value
+    };
+};
+
+export const deleteCommentFromPost = id  => {
+    return {
+        type: DELETE_COMMENT_FROM_POST,
+        id
+    }
+}
+
+export const addingCommentToPost = comment  => ({
+    type: ADD_COMMENT_ON_POST,
+    comment
+});
+
+
+//vote on single comment
+export const getVoteSingleComment = (comment) =>({
+    type: VOTE_SINGLE_COMMENT,
+    comment
+});
+
+//get All Comments for the selected post
+export const getAllComments = comments => ({
+    type: GET_ALL_COMMENTS,
+    comments
 })
 
 //fetch all categories
@@ -122,50 +155,39 @@ export const receiveSinglePostDetails =  id  => dispatch =>
         api.getSinglePostDetails(id).then(details =>dispatch(getSinglePostDetails(details)));
 
 
-//get All Comments for the selected post
-export const getAllComments = comments => ({
-    type: GET_ALL_COMMENTS,
-    comments
-})
-
 export const receiveCommentForOnePostAction  = id =>dispatch =>
         api.getCommentsFromPost(id)
             .then(comments =>dispatch(getAllComments(comments)));
-
-
-//vote on single comment
-export const getVoteSingleComment = (comment) =>({
-    type: VOTE_SINGLE_COMMENT,
-    comment
-});
 
 export const receiveVoteSingleComment = (id , option)=> dispatch =>
         api.voteSingleComment(id, option).then(comments => dispatch(getVoteSingleComment(comments)));
 
 
-
-export const addingCommentToPost = comment  => ({
-        type: ADD_COMMENT_ON_POST,
-        comment
-});
-
 export const receiveCommentToSinglePost = comment => dispatch  =>
     api.addCommentOnPost(comment).then(comment => dispatch (addingCommentToPost(comment)));
 
-export const changeSortAction = value => {
-    return {
-        type: CHANGE_ORDER_BY_SORT,
-        value: value
-    };
-};
 
-export const deleteCommentFromPost = id  => {
-    return {
-        type: DELETE_COMMENT_FROM_POST,
-        id
-    }
-}
 
 export const deleteSingleComment = id => dispatch =>
     api.deletePostComment(id)
         .then(comment => dispatch(deleteCommentFromPost(id)));
+
+
+//get single result
+export const getSingleComment = comment => ({
+    type: GET_SINGLE_COMMENT,
+    comment
+})
+
+export const receiveSingleComment  = id => dispatch =>
+    api.getSingleComment(id).then(comment =>dispatch(getSingleComment(comment)));
+
+
+export const updateSingleComment  = (comment, id) => ({
+    type: UPDATE_SINGLE_COMMENT,
+    comment, id
+})
+
+export const receiveUpdateSingleComment  = (comment, id) => dispatch =>
+    api.updateComment(comment,id)
+        .then(comment => dispatch(updateSingleComment(comment)));
