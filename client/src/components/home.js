@@ -39,12 +39,16 @@ class Home extends Component {
 
                 <div className="container">
                     <div className="row">
-                        <div className = "col-md-6">
+                        <div className = "col-md-10">
                             <h3>Category: All</h3>
+                        </div>
+
+                        <div className="col-md-2">
+                            <h4>Sort By</h4>
+                            <Sorting/>
                         </div>
                     </div>
                     <div className="row">
-                        <Sorting/>
                         {
                             posts && posts.length > 0 ? (
                                 posts
