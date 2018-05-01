@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import {
-    receiveCommentForOnePostAction,
-    retrieveDeleteSinglePost,
-    receiveVoteSingleComment ,
-    receiveCommentToSinglePost,
-    deleteSingleComment,
-} from '../actions';
-import {getVotePostOnVoting,receiveSinglePostDetails,} from '../actions/posts'
+import {getVotePostOnVoting,receiveSinglePostDetails,retrieveDeleteSinglePost} from '../actions/posts'
+import {receiveCommentForOnePostAction,receiveVoteSingleComment,
+        receiveCommentToSinglePost,deleteSingleComment} from '../actions/comment';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import MainMenu from './mainMenu';

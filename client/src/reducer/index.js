@@ -1,16 +1,15 @@
 import { combineReducers } from "redux";
 import { GET_CATEGORIES } from '../actions/categories';
-
 import {  RETRIEVE_POSTS, GET_POSTS_BY_CATEGORY,
           ADDING_POSTS, VOT_ON_POST , DELETE_SINGLE_POST,
           UPDATE_POST,  GET_POST_DETAILS, GET_SINGLE_POST_DETAILS} from '../actions/posts';
 
 
- import {GET_ALL_COMMENTS,
-        VOTE_SINGLE_COMMENT , ADD_COMMENT_ON_POST,
-        CHANGE_ORDER_BY_SORT, DELETE_COMMENT_FROM_POST,
-        GET_SINGLE_COMMENT,UPDATE_SINGLE_COMMENT
-} from '../actions';
+ import {  GET_ALL_COMMENTS, VOTE_SINGLE_COMMENT ,
+           ADD_COMMENT_ON_POST, DELETE_COMMENT_FROM_POST,
+           GET_SINGLE_COMMENT,UPDATE_SINGLE_COMMENT } from '../actions/comment';
+
+import { CHANGE_ORDER_BY_SORT } from '../actions/sorting';
 
 function receiveCategories (state = {} , action){
     switch(action.type){

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as action from '../actions';
 import {getPostsByCategory,getVotePostOnVoting, retrieveDeleteSinglePost} from '../actions/posts'
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as action from '../actions';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import MainMenu from './mainMenu';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { receiveSingleComment , getSingleComment, receiveUpdateSingleComment} from '../actions';
+import { receiveSingleComment , getSingleComment, receiveUpdateSingleComment} from '../actions/comment';
 import MainMenu from './mainMenu';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl  from 'react-bootstrap/lib/FormControl';
