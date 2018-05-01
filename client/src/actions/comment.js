@@ -1,16 +1,11 @@
 //import api
 import *  as api from '../utils/api';
-export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';
-export const VOTE_SINGLE_COMMENT = "VOTE_SINGLE_COMMENT";
-export const ADD_COMMENT_ON_POST = "ADD_COMMENT_ON_POST";
-export const DELETE_COMMENT_FROM_POST = "DELETE_COMMENT_FROM_POST";
-export const GET_SINGLE_COMMENT  = "GET_SINGLE_COMMENT";
-export const UPDATE_SINGLE_COMMENT = "UPDATE_SINGLE_COMMENT";
+import *  as Types from '../actions/actionType';
 
 
 //get all comments
 export const getAllComments = comments => ({
-    type: GET_ALL_COMMENTS,
+    type: Types.GET_ALL_COMMENTS,
     comments
 })
 
@@ -20,7 +15,7 @@ export const receiveCommentForOnePostAction  = id =>dispatch =>
 
 //vote on single comment
 export const getVoteSingleComment = (comment) =>({
-    type: VOTE_SINGLE_COMMENT,
+    type: Types.VOTE_SINGLE_COMMENT,
     comment
 });
 
@@ -29,7 +24,7 @@ export const receiveVoteSingleComment = (id , option)=> dispatch =>
 
 //recieveComment to single post
 export const addingCommentToPost = comment  => ({
-    type: ADD_COMMENT_ON_POST,
+    type: Types.ADD_COMMENT_ON_POST,
     comment
 });
 
@@ -39,7 +34,7 @@ export const receiveCommentToSinglePost = comment => dispatch  =>
 //delete comment from one post
 export const deleteCommentFromPost = id  => {
     return {
-        type: DELETE_COMMENT_FROM_POST,
+        type: Types.DELETE_COMMENT_FROM_POST,
         id
     }
 }
@@ -51,7 +46,7 @@ export const deleteSingleComment = id => dispatch =>
 
 //get single result
 export const getSingleComment = comment => ({
-    type: GET_SINGLE_COMMENT,
+    type: Types.GET_SINGLE_COMMENT,
     comment
 })
 
@@ -60,7 +55,7 @@ export const receiveSingleComment  = id => dispatch =>
 
 //update single comment
 export const updateSingleComment  = (comment, id) => ({
-    type: UPDATE_SINGLE_COMMENT,
+    type: Types.UPDATE_SINGLE_COMMENT,
     comment, id
 })
 

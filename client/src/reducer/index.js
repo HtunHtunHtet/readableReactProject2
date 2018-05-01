@@ -1,14 +1,10 @@
 import { combineReducers } from "redux";
-// import { GET_CATEGORIES } from '../actions/categories';
-
 import receiveCategories from './receiveCategories';
+import receiveComments from './receiveComments';
 
 import {  RETRIEVE_POSTS, GET_POSTS_BY_CATEGORY,
           ADDING_POSTS, VOT_ON_POST , DELETE_SINGLE_POST,
           UPDATE_POST,  GET_POST_DETAILS, GET_SINGLE_POST_DETAILS} from '../actions/posts';
- import {  GET_ALL_COMMENTS, VOTE_SINGLE_COMMENT ,
-           ADD_COMMENT_ON_POST, DELETE_COMMENT_FROM_POST,
-           GET_SINGLE_COMMENT,UPDATE_SINGLE_COMMENT } from '../actions/comment';
 
 import { CHANGE_ORDER_BY_SORT } from '../actions/sorting';
 
@@ -68,57 +64,6 @@ const  posts =  (state= {} ,action) =>{
             return state;
     }
 }
-
-const receiveComments = (state = {} , action) =>{
-    switch (action.type){
-        case GET_ALL_COMMENTS:
-            return {
-                ...state,
-                comments: action.comments
-            }
-        case VOTE_SINGLE_COMMENT:
-            //check comment state
-            console.log("state comment id",state.comments);
-            console.log("action comment id",action.comment);
-
-            //get new state of comment and return
-            const newCommentCount =state.comments.map(
-                                        comments => {
-                                            if(comments.id ===action.comment.id){
-                                                comments.voteScore = action.comment.voteScore;
-                                            }
-                                            return comments;
-                                        });
-            return {
-                ...state,
-                comments: newCommentCount
-            };
-        case ADD_COMMENT_ON_POST:
-            return {
-                ...state,
-                comments: state.comments.concat(action.comment)
-            };
-        case DELETE_COMMENT_FROM_POST:
-            const remainingComments = state.comments.filter(
-                comment =>
-                    comment.id !== action.id
-            );
-            return {
-                ...state,
-                comments: remainingComments
-            };
-        case GET_SINGLE_COMMENT:
-            return action.comment;
-        case UPDATE_SINGLE_COMMENT:
-            return {
-                ...state,
-                ...action.comment
-            }
-        default:
-            return state;
-    }
-}
-
 
 const  sorting = (state = { sort: "popular" }, action) => {
     switch (action.type) {
