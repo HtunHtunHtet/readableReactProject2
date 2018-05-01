@@ -11,4 +11,4 @@ SERVER INSTALLATION
 CLIENT INSTALLATION
 * `cd client`
 * `sudo npm install`
-* `npm start`
+* `npm start`

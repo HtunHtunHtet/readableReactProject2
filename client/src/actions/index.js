@@ -100,6 +100,17 @@ export const getAllComments = comments => ({
     comments
 })
 
+export const updateSingleComment  = (comment, id) => ({
+    type: UPDATE_SINGLE_COMMENT,
+    comment, id
+})
+
+//get single result
+export const getSingleComment = comment => ({
+    type: GET_SINGLE_COMMENT,
+    comment
+})
+
 //fetch all categories
 export const fetchAllCategories = () => dispatch =>
     api
@@ -172,21 +183,9 @@ export const deleteSingleComment = id => dispatch =>
     api.deletePostComment(id)
         .then(comment => dispatch(deleteCommentFromPost(id)));
 
-
-//get single result
-export const getSingleComment = comment => ({
-    type: GET_SINGLE_COMMENT,
-    comment
-})
-
 export const receiveSingleComment  = id => dispatch =>
     api.getSingleComment(id).then(comment =>dispatch(getSingleComment(comment)));
 
-
-export const updateSingleComment  = (comment, id) => ({
-    type: UPDATE_SINGLE_COMMENT,
-    comment, id
-})
 
 export const receiveUpdateSingleComment  = (comment, id) => dispatch =>
     api.updateComment(comment,id)
