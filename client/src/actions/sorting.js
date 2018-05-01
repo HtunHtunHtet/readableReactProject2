@@ -1,9 +1,8 @@
-//import api
-export const CHANGE_ORDER_BY_SORT = "CHANGE_ORDER_BY_SORT";
+import * as Type from './actionType';
 
 export const changeSortAction = value => {
     return {
-        type: CHANGE_ORDER_BY_SORT,
+        type: Type.CHANGE_ORDER_BY_SORT,
         value: value
     };
 };

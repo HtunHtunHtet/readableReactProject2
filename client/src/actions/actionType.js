@@ -18,3 +18,6 @@ export const DELETE_SINGLE_POST     = 'DELETE_SINGLE_POST';
 export const UPDATE_POST            = 'UPDATE_POST';
 export const GET_POST_DETAILS       = 'GET_POST_DETAILS';
 export const GET_SINGLE_POST_DETAILS = 'GET_SINGLE_POST_DETAILS';
+
+//sorting
+export const CHANGE_ORDER_BY_SORT = "CHANGE_ORDER_BY_SORT";
