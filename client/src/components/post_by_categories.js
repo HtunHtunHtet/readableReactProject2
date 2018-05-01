@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as action from '../actions';
+import {getPostsByCategory,getVotePostOnVoting, retrieveDeleteSinglePost} from '../actions/posts'
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import MainMenu from './mainMenu';
@@ -175,5 +176,5 @@ class PostByCategories extends Component {
 
 const mapStateToProps = ({posts,sort}) => ({posts,sort});
 
-export default connect(mapStateToProps,action)(PostByCategories);
+export default connect(mapStateToProps,{getPostsByCategory,getVotePostOnVoting, retrieveDeleteSinglePost})(PostByCategories);
 

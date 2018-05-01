@@ -11,6 +11,8 @@ import Glyphicon   from 'react-bootstrap/lib/Glyphicon';
 import Timestamp from "react-timestamp";
 import Sorting from "./sorting";
 
+import { fetchAllPosts,getVotePostOnVoting ,retrieveDeleteSinglePost} from '../actions/posts';
+
 
 class Home extends Component {
 
@@ -174,5 +176,5 @@ class Home extends Component {
 
 const mapStateToProps = ({posts,sort}) => ({posts,sort});
 
-export default connect(mapStateToProps,action)(Home);
+export default connect(mapStateToProps,{fetchAllPosts,getVotePostOnVoting ,retrieveDeleteSinglePost})(Home);
 

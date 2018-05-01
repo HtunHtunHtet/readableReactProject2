@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { recievePostDetails , receiveUpdatePost } from '../actions';
+import { receiveUpdatePost,recievePostDetails }  from '../actions/posts';
 import MainMenu from './mainMenu';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl  from 'react-bootstrap/lib/FormControl';
