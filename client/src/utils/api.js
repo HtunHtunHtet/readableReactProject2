@@ -116,5 +116,27 @@ export const deletePostComment = id => {
     }).then (result => result.json());
 }
 
+export const getSingleComment  = id =>
+    fetch(`${ROOT_URL}/comments/${id}`, { headers })
+        .then(response => response.json()
+        .then(result => result));
+            // .then(result => console.log("Final result",result));
+
+
+//check single comment details
+// console.log("single comment check",getSingleComment('fb581ab0-4c50-11e8-827e-916c79e6d64a'));
+
+//update comment
+export const updateComment  = ( comment,id  ) => {
+    return fetch(`${ROOT_URL}/comments/${id}`, {
+        method: `PUT`,
+        headers:{
+            ...headers,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(comment)
+    }).then(result=>result.json())
+}
+
 
 
