@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import {fetchAllCategories,getPostsByCategory} from "../actions";
+import {fetchAllCategories} from "../actions/categories";
+import {getPostsByCategory} from "../actions";
 import Navbar from 'react-bootstrap/lib/Navbar';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Nav from 'react-bootstrap/lib/Nav';
