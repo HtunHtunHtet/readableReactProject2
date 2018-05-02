@@ -91,8 +91,17 @@ class PostDetails extends Component {
             <div>
                 <MainMenu/>
                 <div className="container">
-                        <div className="row">
+                    <div className="row">
+                        <div className = "col-md-10">
+                            <h3>Post Details</h3>
+                        </div>
+
+                        <div className="col-md-2">
+                            <h4>Comment: Sort By</h4>
                             <Sorting/>
+                        </div>
+                    </div>
+                        <div className="row">
                             {
                                 posts && posts.length > 0 &&
                                 posts.filter(
